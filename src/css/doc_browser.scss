@@ -1,0 +1,53 @@
+/**
+ * Created by Daniel Shevtsov on 11-Feb-17.
+ *
+ * NOTE: THIS IS A .SCSS FILE
+ *  Please see http://sass-lang.com/ for more information. Sass is a language that transpiles into CSS.
+ *  The CSS file generated from this file is doc_browser.min.css. This file cannot run in the browser on
+ *  its own, it must be transpiled using the Sass transpiler to generate a .css file.
+ */
+
+ //Imports
+ @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+ //Variables
+ $C_TEXT:            #9D9D9D;
+ $C_ACCENT:          #4c5363;
+ $C_DARK_ACCENT:     #222222;
+ $C_BACKGROUND:      #202328;
+ $C_FOREGROUND:      #8c9298;
+ $C_SUCCESS:         #529E50;
+ $C_WARNING:         #d9bd46;
+ $C_ERROR:           #853230;
+
+ //Global Styles
+ body {
+   color: $C_TEXT;
+   background-color: $C_BACKGROUND;
+   font-family: 'Open Sans', sans-serif;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+   height: 100%;
+ }
+
+ h1, h2, h3, h4, h5, h6 {
+   margin-top: 0;
+ }
+
+ #page-container {
+   display: flex;
+   min-height: 100vh;
+   flex-direction: column;
+ }
+
+ #body-container {
+   display: flex;
+   flex: 1;
+   overflow: hidden;
+ }
+
+ .black-border {
+   border-color: rgb(8, 8, 8);
+   border-style: solid;
+   border-width: 1px;
+ }
