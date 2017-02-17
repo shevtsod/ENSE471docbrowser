@@ -42,8 +42,8 @@ export default {
 
   /* small devices (tablets, 768px and up) */
   @media (min-width: 768px) {
-    display: inherit;
-    flex: 0 0 200px;   //Defines the width of the sidebar
+    display: flex;
+    flex: 0 0 200px;
     background-color: $C_DARK_ACCENT;
     border: none;
   }

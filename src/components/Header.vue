@@ -98,7 +98,7 @@ export default {
     //Rotation animation transition
     @include css3(
         transition,
-        transform 600ms cubic-bezier(0.620, -0.600, 0.260, 1.650));
+        transform 600ms cubic-bezier(0.620, -0.600, 0.260, 1.850) );
   }
 
   //'headertitle'

@@ -1,10 +1,9 @@
 /**
- * Created by Daniel Shevtsov on 11-Feb-17.
- *
  * NOTE: THIS IS A .SCSS FILE
  *  Please see http://sass-lang.com/ for more information. Sass is a language that transpiles into CSS.
  *  The CSS file generated from this file is doc_browser.min.css. This file cannot run in the browser on
- *  its own, it must be transpiled using the Sass transpiler to generate a .css file.
+ *  its own, it must be transpiled using the Sass transpiler to generate a .css file. The .css file
+ *  generated is minified to save on file size.
  */
 
  //Imports
@@ -20,29 +19,34 @@
  $C_WARNING:         #d9bd46;
  $C_ERROR:           #853230;
 
+ //Mixins
+ //Generate prefixes for any vendor
+  @mixin css3($property, $value) {
+       @each $prefix in -webkit-, -moz-, -ms-, -o-, '' {
+            #{$prefix}#{$property}: $value;
+       }
+  }
+
  //Global Styles
- body {
-   color: $C_TEXT;
-   background-color: $C_BACKGROUND;
-   font-family: 'Open Sans', sans-serif;
-   -webkit-font-smoothing: antialiased;
-   -moz-osx-font-smoothing: grayscale;
-   height: 100%;
- }
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
 
- h1, h2, h3, h4, h5, h6 {
-   margin-top: 0;
- }
+body {
+  display: flex;
 
- .black-border {
-   border-color: rgb(8, 8, 8);
-   border-style: solid;
-   border-width: 1px;
- }
+  color: $C_TEXT;
+  background-color: $C_BACKGROUND;
+  font-family: 'Open Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-//Generate prefixes for any vendor
- @mixin css3($property, $value) {
-      @each $prefix in -webkit-, -moz-, -ms-, -o-, '' {
-           #{$prefix}#{$property}: $value;
-      }
- }
+h1, h2, h3, h4, h5, h6 {
+  margin-top: auto;
+}
+
+.black-border {
+  @include css3(border, 1px solid rgb(8, 8, 8));
+}

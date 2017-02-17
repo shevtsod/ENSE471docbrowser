@@ -1,9 +1,9 @@
 <template lang='pug'>
-#page-container
+#page
   doc-header
-  #body-container
+  #row
     doc-sidebar
-    doc-reader#content-container
+    #content.ss-container: doc-reader
 </template>
 
 <script>
@@ -21,28 +21,41 @@ export default {
 }
 </script>
 
+
 <!-- Global app styles -->
-<style lang='scss'>
+<style lang='scss' src='./css/doc_browser.scss'></style>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<!-- Local styles -->
+<style lang='scss' scoped>
 @import 'css/doc_browser';
 
-#page-container {
+#page {
   display: flex;
-  min-height: 100vh;
   flex-direction: column;
-  overflow: hidden;
+
+  flex: 1 1 auto;
 }
 
-#body-container {
+#row {
   display: flex;
-  flex: 1;
-  overflow: hidden;
+
+  flex: 1 1 auto;
 }
 
-#content-container {
- display: flex;
- flex: 1;
- flex-direction: column;
- overflow-y: scroll;
- overflow-x: visible;
+#content {
+  @extend .black-border;
+
+  @include css3(border-box, '');
+  @include css3(border-right, none);
+  @include css3(border-bottom, none);
+
+  /* small devices (tablets, 768px and up) */
+  @media (max-width: 767px) {
+    @include css3(border-left, none);
+  }
+
+  overflow-y: scroll;
+  overflow-x: visible;
 }
 </style>
