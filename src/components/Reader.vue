@@ -1,6 +1,7 @@
 <template lang="pug">
-#reader
-
+#reader.ss-container
+  .space
+  p AYY LMAO
 </template>
 
 
@@ -27,7 +28,14 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+@import '../css/doc_browser';
+
 #reader {
-  overflow-y: scroll;
+  @extend .black-border;
+}
+
+.space {
+  height: 2000px;
+  width: 1700px;
 }
 </style>

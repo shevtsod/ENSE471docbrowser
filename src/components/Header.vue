@@ -80,6 +80,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+@import '../css/doc_browser';
+
 .navbar {
   margin: 0;
   border: none;
@@ -94,9 +96,9 @@ export default {
     display: inline-block;
 
     //Rotation animation transition
-    transition-duration: 600ms;
-    transition-property: transform;
-    transition-timing-function: cubic-bezier(0.620, -0.600, 0.260, 1.650);
+    @include css3(
+        transition,
+        transform 600ms cubic-bezier(0.620, -0.600, 0.260, 1.650));
   }
 
   //'headertitle'

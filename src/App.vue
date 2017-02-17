@@ -3,7 +3,7 @@
   doc-header
   #body-container
     doc-sidebar
-    doc-reader
+    doc-reader#content-container
 </template>
 
 <script>
@@ -22,4 +22,27 @@ export default {
 </script>
 
 <!-- Global app styles -->
-<style src='./css/doc_browser.scss' lang='scss'></style>
+<style lang='scss'>
+@import 'css/doc_browser';
+
+#page-container {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#body-container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+#content-container {
+ display: flex;
+ flex: 1;
+ flex-direction: column;
+ overflow-y: scroll;
+ overflow-x: visible;
+}
+</style>
