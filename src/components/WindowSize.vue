@@ -13,6 +13,7 @@ export default {
 
   computed: {
     smallDevice () {
+      this.$emit('smallDevice');
       return this.windowWidth < 768 ? true : false;
     }
   },
@@ -23,10 +24,10 @@ export default {
   },
 
   //Attach browser resize listeners
-  created: function () {
+  mounted() {
     window.addEventListener('resize', this.setWindowWidth);
   },
-  beforeDestroy: function () {
+  beforeDestroy() {
     window.removeEventListener('resize', this.setWindowWidth);
   },
 };

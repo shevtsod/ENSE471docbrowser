@@ -3,7 +3,10 @@
   #header: doc-header
   #row
     doc-sidebar
-    #content: doc-reader
+    #content
+      //ADD STATES HERE
+      doc-reader(v-if=" state.name == 'reader' " v-on:change-state='setState')
+      doc-editor(v-if=" state.name == 'editor' " v-on:change-state='setState')
     doc-bookmarks
 </template>
 
@@ -12,6 +15,12 @@ import header from './components/Header.vue'
 import sidebar from './components/Sidebar.vue'
 import reader from './components/Reader.vue'
 import bookmarks from './components/Bookmarks.vue'
+import editor from './components/Editor.vue'
+
+let STATE = {
+  READER: {value: 0, name: 'reader'},
+  EDITOR: {value: 1, name: 'editor'},
+};
 
 export default {
   name: 'app',
@@ -20,7 +29,28 @@ export default {
     'doc-sidebar': sidebar,
     'doc-reader': reader,
     'doc-bookmarks': bookmarks,
-  }
+    'doc-editor': editor,
+  },
+  data: function() {
+    return {
+      state: STATE.READER,
+    }
+  },
+  computed: {
+  },
+  methods: {
+    //Allow children to change the state of the app
+    setState(value) {
+      switch(value.toLowerCase()) {
+        case STATE.READER.name:
+          this.state = STATE.READER;
+          break;
+        case STATE.EDITOR.name:
+          this.state = STATE.EDITOR;
+          break;
+      }
+    }
+  },
 }
 </script>
 
@@ -41,31 +71,13 @@ export default {
 }
 
 #header {
-  flex: 1 1 auto;
-
-  @media (min-width: 768px) {
-    flex: 0 1 auto;
-  }
+  flex: 0 0 auto;
 }
 
 #row {
   display: flex;
 
   flex: 1 1 auto;
-}
-
-#sidebar {
-  display: none;
-
-  /* small devices (tablets, 768px and up) */
-  @media (min-width: 768px) {
-    display: flex;
-    flex: 0 0 270px;
-    background-color: $C_DARK_ACCENT;
-    border: none;
-  }
-
-  overflow-y: auto;
 }
 
 #content {
@@ -76,9 +88,10 @@ export default {
 
   /* small devices (tablets, 767px and below) */
   @media (max-width: 767px) {
-    @include css3(border-left, none);
     @include css3(border-right, none);
   }
+
+  flex: 1 1 auto;
 
   overflow: auto;
 }

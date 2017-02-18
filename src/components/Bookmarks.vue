@@ -1,11 +1,13 @@
 <template lang='pug'>
 .bookmarks(v-bind:class="displayContent")
-  a.chevronlink(href='#'): i.chevron.fa(
-    v-on:click='display = !display'
-    v-bind:class='displayChevron'
-    )
-  .content(v-if='display')
-    h4 {{ msg }}
+  #header
+    .chevronlink: a(href='#'): i.chevron.fa(
+      v-on:click='display = !display'
+      v-bind:class='displayChevron'
+      )
+    .title(v-if='display')
+      h4 {{ msg }}
+  #content
 </template>
 
 
@@ -64,36 +66,41 @@ export default {
     all 200ms linear );
 }
 
-.content {
-  display: flex;
-  flex-direction: column;
-  flex: 0 0 100%;
-
-  margin-top: 0;
-  margin-left: 10px;
-}
-
-.chevronlink {
-  flex: 0 0 auto;
-  align-self: flex-start;
-}
-
-a .chevron {
-  color: $C_TEXT;
-  padding: 10px;
-
-  //Rotation animation transition
-  @include css3(
-    transition,
-    transform 500ms cubic-bezier(0.620, -0.600, 0.260, 1.450) );
-
-  &:hover {
-    transform: rotate(180deg);
-    cursor: hand;
-  }
-}
 
 .hidden-bookmarks {
   flex: 0 0 30px;
+}
+
+#header {
+  display: flex;
+  align-items: center;
+
+  .chevronlink {
+    flex: 1 0 auto;
+  }
+
+  a .chevron {
+    color: $C_TEXT;
+    padding: 10px;
+
+    //Rotation animation transition
+    @include css3(
+      transition,
+      transform 500ms cubic-bezier(0.620, -0.600, 0.260, 1.450) );
+
+    &:hover {
+      transform: rotate(180deg);
+      cursor: hand;
+    }
+  }
+
+  .title {
+    flex: 0 0 auto;
+
+    display: flex;
+    align-items: flex-end;
+
+    padding-right: 10px;
+  }
 }
 </style>

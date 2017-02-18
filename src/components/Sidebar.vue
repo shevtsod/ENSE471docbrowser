@@ -1,11 +1,13 @@
 <template lang='pug'>
-.sidebar(v-bind:class="displayContent")
-  a.chevronlink(href='#'): i.chevron.fa(
-    v-on:click='display = !display'
-    v-bind:class='displayChevron'
-    )
-  .content(v-if='display')
-    h4 {{ msg }}
+.sidebar(v-bind:class="{ 'min-sidebar': displayContent }")
+  #header
+    .title
+      h4 {{ msg }}
+    a.chevronlink(href='#'): i.chevron.fa(
+      v-on:click='minimize = !minimize'
+      v-bind:class='reverseChevron'
+      )
+  #content
 </template>
 
 
@@ -26,17 +28,21 @@ export default {
   data: function() {
     return {
       msg: 'Sidebar',
-      display: true,
+      minimize: false,
     }
   },
   computed: {
-    //Hide the bookmarks when display becomes true
+    //Minimize the bookmarks when minimize is true
     displayContent() {
-      return this.display ? '' : 'hidden-sidebar';
+      return (this.minimize || this.smallDevice)
+          ? true
+          : false;
     },
     //Reverse the direction of the chevron when bookmarks are hidden
-    displayChevron() {
-      return this.display ? 'fa-chevron-right' : 'fa-chevron-left';
+    reverseChevron() {
+      return (this.minimize || this.smallDevice)
+          ? 'fa-chevron-right'
+          : 'fa-chevron-left';
     }
   }
 };
@@ -48,52 +54,49 @@ export default {
 @import '../css/doc_browser';
 
 .sidebar {
-  display: none;
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 270px;
+  background-color: $C_DARK_ACCENT;
+  border: none;
 
-  /* small devices (tablets, 768px and up) */
-  @media (min-width: 768px) {
-    display: flex;
-    flex-direction: column;
-    flex: 0 0 270px;
-    background-color: $C_DARK_ACCENT;
-    border: none;
-  }
 
   @include css3(
     transition,
     all 200ms linear );
 }
 
-.content {
-  display: flex;
-  flex-direction: column;
-  flex: 0 0 100%;
 
-  margin-top: 0;
-  margin-left: 10px;
-}
-
-.chevronlink {
-  flex: 0 0 auto;
-  align-self: flex-end;
-}
-
-a .chevron {
-  color: $C_TEXT;
-  padding: 10px;
-
-  //Rotation animation transition
-  @include css3(
-    transition,
-    transform 500ms cubic-bezier(0.620, -0.600, 0.260, 1.450) );
-
-  &:hover {
-    transform: rotate(180deg);
-    cursor: hand;
-  }
-}
-
-.hidden-sidebar {
+.min-sidebar {
   flex: 0 0 30px;
+}
+
+#header {
+  display: flex;
+  align-items: center;
+
+  .chevronlink {
+    flex: 0 0 auto;
+  }
+
+  .title {
+    flex: 1 0 auto;
+    padding-left: 10px;
+  }
+
+  a .chevron {
+    color: $C_TEXT;
+    padding: 10px;
+
+    //Rotation animation transition
+    @include css3(
+      transition,
+      transform 500ms cubic-bezier(0.620, -0.600, 0.260, 1.450) );
+
+    &:hover {
+      transform: rotate(180deg);
+      cursor: hand;
+    }
+  }
 }
 </style>
