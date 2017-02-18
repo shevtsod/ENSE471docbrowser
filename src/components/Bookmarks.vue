@@ -1,5 +1,5 @@
 <template lang='pug'>
-.sidebar(v-bind:class="displayContent")
+.bookmarks(v-bind:class="displayContent")
   a.chevronlink(href='#'): i.chevron.fa(
     v-on:click='display = !display'
     v-bind:class='displayChevron'
@@ -22,21 +22,21 @@ export default {
     windowSize: null,
   },
 
-  name: 'doc-sidebar',
+  name: 'doc-bookmarks',
   data: function() {
     return {
-      msg: 'Sidebar',
-      display: true,
+      msg: 'Bookmarks',
+      display: false,
     }
   },
   computed: {
     //Hide the bookmarks when display becomes true
     displayContent() {
-      return this.display ? '' : 'hidden-sidebar';
+      return this.display ? '' : 'hidden-bookmarks';
     },
     //Reverse the direction of the chevron when bookmarks are hidden
     displayChevron() {
-      return this.display ? 'fa-chevron-right' : 'fa-chevron-left';
+      return this.display ? 'fa-chevron-left' : 'fa-chevron-right';
     }
   }
 };
@@ -47,7 +47,7 @@ export default {
 <style scoped lang='scss'>
 @import '../css/doc_browser';
 
-.sidebar {
+.bookmarks {
   display: none;
 
   /* small devices (tablets, 768px and up) */
@@ -75,7 +75,7 @@ export default {
 
 .chevronlink {
   flex: 0 0 auto;
-  align-self: flex-end;
+  align-self: flex-start;
 }
 
 a .chevron {
@@ -93,7 +93,7 @@ a .chevron {
   }
 }
 
-.hidden-sidebar {
+.hidden-bookmarks {
   flex: 0 0 30px;
 }
 </style>
