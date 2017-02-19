@@ -2,15 +2,22 @@
 A basic prototype of a user interface for a documentation browser made using [Vue.js](https://vuejs.org/) and some other libraries.  
 This project was made with the sole intent of studying a student-chosen user interface library.
 
-Have a look at the final product at <http://shevtsod.github.io/ense471docbrowser>
+Have a look at the final product at <http://shevtsod.github.io/ENSE471docbrowser>
 
 The current build of the project is simply a client-side user interface with a preloaded markdown document that can be edited by the user. Changes are lost upon closing the window.
 
 ## Build Instructions
 To build the project, you should have [Node.js](https://nodejs.org/en/) installed.  
-*   Clone this repository, and navigate to it on a command prompt using `cd directory-name`.  
-*   In the root directory of the project, run the command `npm install` to install all of the dependencies of the project  
-(apart from the static ones that are already provided under the `static/` directory).  
+*   Clone this repository, and navigate to it on a command prompt using
+
+```bash
+cd directory-name
+```  
+*   In the root directory of the project, run the following command to install all of the dependencies of the project (apart from the static ones that are already provided under the `static/` directory).
+
+```bash
+npm install
+```   
 *   Finally, run one of the following:
 
 ``` bash
@@ -21,11 +28,11 @@ npm run dev
 npm run build
 ```
 
-For a detailed explanation on the project's scaffold, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+For a detailed explanation on the project's scaffold, please see the [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 ## Credits
 Below is a list of libraries used by this project:
-*   [Vue.js](https://vuejs.org/)
+*   [**Vue.js**](https://vuejs.org/)
 *   [vue-loader](https://github.com/vuejs/vue-loader)
 *   [webpack module bundler](https://webpack.github.io/)
 *   [ES2015 by Babel](https://babeljs.io/)
@@ -33,5 +40,6 @@ Below is a list of libraries used by this project:
 *   [Normalize.css](https://necolas.github.io/normalize.css/)
 *   [Pug](https://pugjs.org/api/getting-started.html)
 *   [Bootstrap](http://getbootstrap.com/)
+*   [jQuery](https://jquery.com/)
 *   [Font Awesome](http://fontawesome.io/)
 *   [Showdown](https://github.com/showdownjs/showdown)
