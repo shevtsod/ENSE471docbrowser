@@ -7,12 +7,25 @@
       v-on:click.prevent='minimize = !minimize'
       v-bind:class='reverseChevron'
       )
-  #content
+  #content(v-if='!minimize')
+    .project(v-for="(project, index) in projects")
+      i.fa.fa-caret-down
+      h5 Project {{ index + 1 }}
+      .subsection(v-for="subsection in project")
+        i.fa.fa-circle
+        h6 {{ subsection }}
 </template>
 
 
 <script>
 import WindowSize from './WindowSize.vue'
+
+//Placeholder projects
+//In an actual application, we would retrieve data from a database
+let project1 = ['Sub-Section 1', 'Sub-Section 2', 'Sub-Section 3'];
+let project2 = ['Sub-Section 1'];
+let project3 = ['Sub-Section 1', 'Sub-Section 2'];
+let projects = [project1, project2, project3];
 
 export default {
 
@@ -29,6 +42,7 @@ export default {
     return {
       msg: 'Sidebar',
       minimize: false,
+      projects: projects,
     }
   },
   computed: {
@@ -109,6 +123,36 @@ export default {
     &:hover {
       transform: rotate(180deg);
       cursor: hand;
+    }
+  }
+}
+
+#content {
+  margin-top: 5px;
+  margin-left: 25px;
+  h5, h6 {
+    display: inline-block;
+    padding-left: 10px;
+  }
+
+  .project {
+    &:hover {
+      cursor: pointer;
+
+      h5, .fa-caret-down {
+        color: white;
+      }
+    }
+  }
+
+  .subsection {
+    margin-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    &:hover {
+      cursor: pointer;
+      color: white;
     }
   }
 }

@@ -7,7 +7,9 @@
       )
     .title(v-if='display')
       h4 {{ msg }}
-  #content
+  #content(v-if='display')
+    div(v-for="bookmark in bookmarks")
+      h4 {{ bookmark }}
 </template>
 
 
@@ -18,6 +20,7 @@ export default {
     return {
       msg: 'Bookmarks',
       display: false,
+      bookmarks: ['Bookmark 1', 'Bookmark 2', 'Bookmark 3'],
     }
   },
   computed: {
@@ -90,6 +93,27 @@ export default {
     align-items: flex-end;
 
     padding-right: 10px;
+  }
+}
+
+#content {
+  flex: 1 1 auto;
+
+  text-align: center;
+  margin-top: 10px;
+
+  h4 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: $C_BACKGROUND;
+    @include css3(border, 1px solid $C_ACCENT);
+    @include css3(border-left, none);
+    @include css3(border-right, none);
+
+    &:hover {
+      cursor: pointer;
+      background: $C_ACCENT;
+    }
   }
 }
 </style>
