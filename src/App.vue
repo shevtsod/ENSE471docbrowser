@@ -5,8 +5,17 @@
     doc-sidebar
     #content
       //- ADD STATES HERE
-      doc-reader(v-if=" state.name == 'reader' " v-on:change-state='setState')
-      doc-editor(v-if=" state.name == 'editor' " v-on:change-state='setState')
+      doc-reader(
+        v-if=" state.name == 'reader' "
+        v-bind:file='file' v-bind:text='text'
+        v-on:change-state='setState'
+        )
+      doc-editor(
+        v-if=" state.name == 'editor' "
+        v-bind:file='file' v-bind:text='text'
+        v-on:change-state='setState'
+        v-on:change-text='setText'
+        )
     doc-bookmarks
 </template>
 
@@ -17,10 +26,17 @@ import reader from './components/Reader.vue'
 import bookmarks from './components/Bookmarks.vue'
 import editor from './components/Editor.vue'
 
+import placeholder from './placeholder.js'
+
 let STATE = {
   READER: {value: 0, name: 'reader'},
   EDITOR: {value: 1, name: 'editor'},
 };
+
+
+//This is just placeholder text
+//In an actual application, we would retrieve data from a database
+let defaultText = placeholder;
 
 export default {
   name: 'app',
@@ -34,6 +50,9 @@ export default {
   data: function() {
     return {
       state: STATE.READER,
+
+      file: 'Sub-Section 1',
+      text: defaultText,
     }
   },
   computed: {
@@ -48,8 +67,13 @@ export default {
         case STATE.EDITOR.name:
           this.state = STATE.EDITOR;
           break;
+        //ADD NEW STATE CASES HERE
       }
     },
+    //Allow children to change the text of the file
+    setText(text) {
+      this.text = text;
+    }
   },
 }
 </script>
@@ -77,7 +101,7 @@ export default {
 #row {
   display: flex;
 
-  flex: 1 0 auto;
+  flex: 1 1 auto;
 }
 
 #content {
@@ -93,10 +117,11 @@ export default {
 
   flex: 1 1 auto;
 
+  max-height: 100vh;
+  max-width: 100vw;
+
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-
-  overflow: auto;
 }
 </style>

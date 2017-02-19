@@ -8,21 +8,30 @@
         )
         |EDIT
     #detail
-      p {{ text }}
+      p(v-html='preview')
 </template>
 
 
 <script>
+import showdown from 'showdown';
+//Using showdown for markdown-to-html (see https://github.com/showdownjs/showdown)
+let converter = new showdown.Converter();
+converter.setOption('headerLevelStart', 2);
+converter.setOption('tables', true);
+converter.setFlavor('github');
+
 export default {
   name: 'doc-reader',
+  props: ['file', 'text'],
   data: function() {
     return {
-      file: 'Sub-Section 1',
-      text: 'default text',
     }
   },
   computed: {
-
+    preview() {
+      //Convert markdown to html using showdown
+      return converter.makeHtml(this.text);
+    }
   },
   methods: {
     goToEditor() {
@@ -39,7 +48,13 @@ export default {
 #reader {
   display: flex;
   flex-direction: column;
-  flex: 1 0 auto;
+  flex: 1 1 auto;
+
+  min-height: 0;
+  max-height: 94vh;
+  min-width: 0;
+  max-width: 94vw;
+  overflow: auto;
 
   padding: 10px;
 }
@@ -52,6 +67,7 @@ export default {
 
   /* small devices (tablets, 768px and up) */
   @media (min-width: 768px) {
+    padding-left: 40px;
     padding-right: 10%;
   }
 
@@ -84,5 +100,8 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: stretch;
+
+  min-height: 0;
+  max-height: 50vh;
 }
 </style>

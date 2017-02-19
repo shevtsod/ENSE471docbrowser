@@ -2,16 +2,23 @@
 #editor
   #summary
     h1 {{ file }}
-    button.btn.btn-primary.edit-button(
-        v-on:click.prevent="$emit('change-state', 'reader')"
-      )
-      |EDIT
+    p Created: Jan. 1, 2017
+    p Last Modified: Today
   #detail
-    #input: textarea(v-model='text')
+    #input: textarea(v-model='textprop')
     #output: div(v-html='preview')
     #space
   #control
-    |TEST
+    #discard: button.btn.btn-danger.edit-button(
+        v-on:click.prevent="$emit('change-state', 'reader')"
+      )
+      i.fa.fa-times(aria-hidden="true")
+      |  DISCARD CHANGES
+    #submit: button.btn.btn-success.edit-button(
+        v-on:click.prevent="submitChanges"
+      )
+      i.fa.fa-floppy-o(aria-hidden="true")
+      |  SAVE
 </template>
 
 
@@ -25,19 +32,25 @@ converter.setFlavor('github');
 
 export default {
   name: 'doc-reader',
+  props: ['file', 'text'],
   data: function() {
     return {
-      file: 'Sub-Section 1',
-      text: '',
+      textprop: this.text,
     }
   },
   computed: {
     preview() {
       //Convert markdown to html using showdown
-      return converter.makeHtml(this.text);
+      return converter.makeHtml(this.textprop);
     }
   },
   methods: {
+    submitChanges() {
+      //Change the state to the reader
+      this.$emit('change-state', 'reader');
+      //Pass the new text to the parent
+      this.$emit('change-text', this.textprop);
+    }
   },
 };
 </script>
@@ -62,18 +75,17 @@ export default {
   display: flex;
   flex-direction: row;
 
-  @include css3(border-bottom, 2px solid $C_TEXT);
-
   h1 {
     flex: 1 0 auto;
   }
 
-  .edit-button {
-    flex: 0 0 auto;
+  p {
+    flex: 0 1 auto;
+    margin-left: 30px;
+    align-self: flex-end;
   }
 
   padding-bottom: 20px;
-  margin-bottom: 10px;
 }
 
 #detail {
@@ -128,30 +140,27 @@ export default {
 
     padding: 10px;
 
+    overflow: auto;
+
     /* small devices (tablets, 768px and up) */
     @media (min-width: 768px) {
       flex-direction: row;
       flex: 1 1 50vw;
       max-width: 50vw;
       min-width: 0;
+      max-height: 77.8vh;
+      min-height: 0;
     }
     @media (max-width: 767px) {
       flex: 1 1 50vw;
+      max-width: 93vw;
+      min-width: 0;
     }
 
     div {
-
-      max-height: 100%;
-      min-height: 0;
-
-      overflow: auto;
-
       /* small devices (tablets, 768px and up) */
       @media (min-width: 768px) {
         flex: 1 1 80vh;
-        white-space: nowrap;
-        max-height: 80.5vh;
-        min-height: 0;
       }
       @media (max-width: 767px) {
         flex: 1 1 50vw;
@@ -176,9 +185,30 @@ textarea {
   outline: none;
 
   overflow: auto;
+
+  /* small devices (tablets, 768px and up) */
+  @media (min-width: 768px) {
+    white-space: nowrap;
+  }
 }
 
 #control {
+  background-color: $C_FOREGROUND;
+  padding: 10px;
+  flex: 0 0 auto;
 
+  display: flex;
+
+  @include css3(border, 1px solid $C_ACCENT);
+  @include css3(border-radius, 5px);
+
+  margin-top: 10px;
+  #discard {
+    flex: 1 1 auto;
+  }
+
+  #submit {
+    flex: 0 0 auto;
+  }
 }
 </style>
