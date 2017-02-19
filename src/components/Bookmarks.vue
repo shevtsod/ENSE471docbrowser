@@ -2,7 +2,7 @@
 .bookmarks(v-bind:class="displayContent")
   #header
     .chevronlink: a(href='#'): i.chevron.fa(
-      v-on:click='display = !display'
+      v-on:click.prevent='display = !display'
       v-bind:class='displayChevron'
       )
     .title(v-if='display')
@@ -12,18 +12,7 @@
 
 
 <script>
-import WindowSize from './WindowSize.vue'
-
 export default {
-
-  //Compose other components
-  mixins: [
-    WindowSize,
-  ],
-  props: {
-    windowSize: null,
-  },
-
   name: 'doc-bookmarks',
   data: function() {
     return {

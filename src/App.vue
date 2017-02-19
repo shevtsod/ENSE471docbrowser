@@ -1,10 +1,10 @@
 <template lang='pug'>
 #page
-  #header: doc-header
+  #header: doc-header(v-on:change-state='setState')
   #row
     doc-sidebar
     #content
-      //ADD STATES HERE
+      //- ADD STATES HERE
       doc-reader(v-if=" state.name == 'reader' " v-on:change-state='setState')
       doc-editor(v-if=" state.name == 'editor' " v-on:change-state='setState')
     doc-bookmarks
@@ -49,7 +49,7 @@ export default {
           this.state = STATE.EDITOR;
           break;
       }
-    }
+    },
   },
 }
 </script>
@@ -60,7 +60,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <!-- Local styles -->
-<style lang='scss' scoped>
+<style scoped lang='scss'>
 @import 'css/doc_browser';
 
 #page {
@@ -77,7 +77,7 @@ export default {
 #row {
   display: flex;
 
-  flex: 1 1 auto;
+  flex: 1 0 auto;
 }
 
 #content {
@@ -92,6 +92,10 @@ export default {
   }
 
   flex: 1 1 auto;
+
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
 
   overflow: auto;
 }

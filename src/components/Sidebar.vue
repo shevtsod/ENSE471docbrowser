@@ -1,10 +1,10 @@
 <template lang='pug'>
-.sidebar(v-bind:class="{ 'min-sidebar': displayContent }")
+.sidebar(v-bind:class="{'min-sidebar': displayContent }")
   #header
-    .title
+    .title(v-if='!minimize')
       h4 {{ msg }}
     a.chevronlink(href='#'): i.chevron.fa(
-      v-on:click='minimize = !minimize'
+      v-on:click.prevent='minimize = !minimize'
       v-bind:class='reverseChevron'
       )
   #content
@@ -34,17 +34,30 @@ export default {
   computed: {
     //Minimize the bookmarks when minimize is true
     displayContent() {
-      return (this.minimize || this.smallDevice)
+      return (this.minimize)
           ? true
           : false;
     },
     //Reverse the direction of the chevron when bookmarks are hidden
     reverseChevron() {
-      return (this.minimize || this.smallDevice)
-          ? 'fa-chevron-right'
-          : 'fa-chevron-left';
+      return (this.minimize)
+          ? 'fa-chevron-left'
+          : 'fa-chevron-right';
     }
-  }
+  },
+
+  //Listen to window resize events
+  mounted() {
+    //Get initial size
+    if(this.smallDevice) {
+      this.minimize = true;
+    }
+
+    //Listen to 'small-device' event from WindowSize
+    this.$on('small-device', function () {
+      this.minimize = true;
+    });
+  },
 };
 </script>
 

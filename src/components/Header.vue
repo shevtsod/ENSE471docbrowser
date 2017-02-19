@@ -6,6 +6,7 @@ nav.navbar.navbar-inverse.navbar-static-top
         href='#'
         v-on:mouseenter='icon = !icon'
         v-on:mouseleave='icon = !icon'
+        v-on:click.prevent="$emit('change-state', 'reader')"
       )
         i(v-bind:class='getIcon')
         //img(alt='brand' src='../assets/logo.png')
@@ -20,11 +21,11 @@ nav.navbar.navbar-inverse.navbar-static-top
         span.icon-bar
         span.icon-bar
     #navbar-to-collapse.collapse.navbar-collapse
-      .navbar-form.navbar-right
+      form.navbar-form.navbar-right
         .input-group.form-group
           input.form-control(type='text' placeholder='Search')
           span.input-group-btn
-            button.btn.btn-default(href='#')
+            button.btn.btn-default(href='#' v-on:click.preventdefault='')
               span.glyphicon.glyphicon-search
       .nav.navbar-right
         ul.nav.navbar-nav.navbar-right
@@ -49,20 +50,13 @@ export default {
 
   data: function() {
     return {
+      //Icon is a boolean value that defines the 2 different
       icon: false,
     }
   },
 
   computed: {
-    // If icon is an image
-    /*
-    logo () {
-      // This is the required method of specifying an image path with webpack
-      // in JavaScript
-      return require('../assets/' + this.id + '.png');
-    },
-    */
-    // If icon is a font-awesome icon
+    // Get the icon type to render
     getIcon () {
       return this.icon ? 'fa fa-bookmark fa-lg' : 'fa fa-bookmark-o fa-lg'
     },
@@ -72,7 +66,7 @@ export default {
       return this.windowWidth < 768
         ? 'DB'
         : 'Documentation Browser';
-    }
+    },
   },
 };
 </script>
