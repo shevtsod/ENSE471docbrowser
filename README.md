@@ -2,7 +2,7 @@
 A basic prototype of a user interface for a documentation browser made using [Vue.js](https://vuejs.org/) and some other libraries.  
 This project was made with the sole intent of studying a student-chosen user interface library.
 
-Have a look at the final product at <http://shevtsod.github.io/ENSE471docbrowser>
+>**Have a look at the final product at <http://shevtsod.github.io/ENSE471docbrowser>**
 
 The current build of the project is simply a client-side user interface in the form of an SPA with a preloaded markdown document that can be edited by the user. Changes are lost upon reloading or closing the page.
 
