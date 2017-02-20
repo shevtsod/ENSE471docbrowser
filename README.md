@@ -30,6 +30,9 @@ npm run build
 
 For a detailed explanation on the project's scaffold, please see the [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
+## Known Issues
+*   There are several layout issues due to unfamiliary and difficulty in working with CSS flexbox.
+
 ## Credits
 Below is a list of libraries used by this project:
 *   [**Vue.js**](https://vuejs.org/)
