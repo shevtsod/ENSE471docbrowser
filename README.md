@@ -4,7 +4,7 @@ This project was made with the sole intent of studying a student-chosen user int
 
 Have a look at the final product at <http://shevtsod.github.io/ENSE471docbrowser>
 
-The current build of the project is simply a client-side user interface with a preloaded markdown document that can be edited by the user. Changes are lost upon closing the window.
+The current build of the project is simply a client-side user interface in the form of an SPA with a preloaded markdown document that can be edited by the user. Changes are lost upon reloading or closing the page.
 
 ## Build Instructions
 To build the project, you should have [Node.js](https://nodejs.org/en/) installed.  
